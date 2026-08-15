@@ -241,3 +241,69 @@ if (complianceMedia && !prefersReducedMotion) {
     image.style.transform = "";
   });
 }
+
+
+
+
+/* Use cases reveal */
+
+const useCaseRevealElements = document.querySelectorAll(
+  ".use-cases-reveal, .use-case-reveal"
+);
+
+if (useCaseRevealElements.length) {
+  if (prefersReducedMotion) {
+    useCaseRevealElements.forEach((element) => {
+      element.classList.add("is-visible");
+    });
+  } else {
+    const useCasesObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.14,
+        rootMargin: "0px 0px -55px"
+      }
+    );
+
+    useCaseRevealElements.forEach((element) => {
+      useCasesObserver.observe(element);
+    });
+  }
+}
+
+
+/* Use case interaction */
+
+const useCaseCards = document.querySelectorAll(".use-case-card");
+
+const setActiveUseCase = (selectedCard) => {
+  useCaseCards.forEach((card) => {
+    card.classList.remove("is-active");
+  });
+
+  selectedCard.classList.add("is-active");
+};
+
+useCaseCards.forEach((card) => {
+  card.addEventListener("click", () => {
+    setActiveUseCase(card);
+  });
+
+  card.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") {
+      return;
+    }
+
+    event.preventDefault();
+    setActiveUseCase(card);
+  });
+});
