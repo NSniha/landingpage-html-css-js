@@ -307,3 +307,116 @@ useCaseCards.forEach((card) => {
     setActiveUseCase(card);
   });
 });
+
+
+
+/* Trust section reveal */
+
+const trustRevealElements = document.querySelectorAll(
+  ".trust-header-reveal, .trust-card-reveal"
+);
+
+if (trustRevealElements.length) {
+  if (prefersReducedMotion) {
+    trustRevealElements.forEach((element) => {
+      element.classList.add("is-visible");
+    });
+  } else {
+    const trustRevealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.16,
+        rootMargin: "0px 0px -50px"
+      }
+    );
+
+    trustRevealElements.forEach((element) => {
+      trustRevealObserver.observe(element);
+    });
+  }
+}
+
+
+/* Animated statistics */
+
+const trustCounters = document.querySelectorAll(".trust-number");
+
+const animateTrustCounter = (counter) => {
+  if (counter.dataset.counted === "true") {
+    return;
+  }
+
+  counter.dataset.counted = "true";
+
+  const target = Number(counter.dataset.counter);
+  const decimals = Number(counter.dataset.decimals || 0);
+  const suffix = counter.dataset.suffix || "";
+  const duration = 1500;
+  const startTime = performance.now();
+
+  const updateCounter = (currentTime) => {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+
+    const easedProgress =
+      1 - Math.pow(1 - progress, 4);
+
+    const currentValue = target * easedProgress;
+
+    counter.textContent =
+      `${currentValue.toFixed(decimals)}${suffix}`;
+
+    if (progress < 1) {
+      requestAnimationFrame(updateCounter);
+      return;
+    }
+
+    counter.textContent =
+      `${target.toFixed(decimals)}${suffix}`;
+  };
+
+  requestAnimationFrame(updateCounter);
+};
+
+
+if (trustCounters.length) {
+  if (prefersReducedMotion) {
+    trustCounters.forEach((counter) => {
+      const target = Number(counter.dataset.counter);
+      const decimals = Number(counter.dataset.decimals || 0);
+      const suffix = counter.dataset.suffix || "";
+
+      counter.textContent =
+        `${target.toFixed(decimals)}${suffix}`;
+    });
+  } else {
+    const trustCounterObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          animateTrustCounter(entry.target);
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.65
+      }
+    );
+
+    trustCounters.forEach((counter) => {
+      trustCounterObserver.observe(counter);
+    });
+  }
+}
