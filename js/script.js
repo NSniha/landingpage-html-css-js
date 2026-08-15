@@ -133,3 +133,111 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     });
   });
 });
+
+
+
+/* Compliance section reveal */
+
+const complianceRevealElements = document.querySelectorAll(
+  ".reveal-up, .reveal-left, .reveal-feature"
+);
+
+if (complianceRevealElements.length) {
+  if (prefersReducedMotion) {
+    complianceRevealElements.forEach((element) => {
+      element.classList.add("is-visible");
+    });
+  } else {
+    const complianceObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.14,
+        rootMargin: "0px 0px -55px"
+      }
+    );
+
+    complianceRevealElements.forEach((element) => {
+      complianceObserver.observe(element);
+    });
+  }
+}
+
+
+/* Interactive feature cards */
+
+const complianceFeatures = document.querySelectorAll(
+  ".compliance-feature"
+);
+
+const activateComplianceFeature = (selectedFeature) => {
+  complianceFeatures.forEach((feature) => {
+    feature.classList.remove("is-active");
+  });
+
+  selectedFeature.classList.add("is-active");
+};
+
+complianceFeatures.forEach((feature) => {
+  feature.addEventListener("click", () => {
+    activateComplianceFeature(feature);
+  });
+
+  feature.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") {
+      return;
+    }
+
+    event.preventDefault();
+    activateComplianceFeature(feature);
+  });
+});
+
+
+/* Subtle image movement */
+
+const complianceMedia = document.querySelector(
+  ".compliance-image-wrap"
+);
+
+if (complianceMedia && !prefersReducedMotion) {
+  complianceMedia.addEventListener("pointermove", (event) => {
+    if (window.innerWidth <= 920) {
+      return;
+    }
+
+    const bounds = complianceMedia.getBoundingClientRect();
+
+    const x =
+      (event.clientX - bounds.left) / bounds.width - 0.5;
+
+    const y =
+      (event.clientY - bounds.top) / bounds.height - 0.5;
+
+    const moveX = x * -8;
+    const moveY = y * -6;
+
+    const image = complianceMedia.querySelector(
+      ".compliance-image"
+    );
+
+    image.style.transform =
+      `translate3d(${moveX}px, ${moveY}px, 0) scale(1.075)`;
+  });
+
+  complianceMedia.addEventListener("pointerleave", () => {
+    const image = complianceMedia.querySelector(
+      ".compliance-image"
+    );
+
+    image.style.transform = "";
+  });
+}
