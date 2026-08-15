@@ -420,3 +420,68 @@ if (trustCounters.length) {
     });
   }
 }
+
+
+
+/* How it works reveal */
+
+const processRevealElements = document.querySelectorAll(
+  ".process-header-reveal, .process-card-reveal"
+);
+
+if (processRevealElements.length) {
+  if (prefersReducedMotion) {
+    processRevealElements.forEach((element) => {
+      element.classList.add("is-visible");
+    });
+  } else {
+    const processRevealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.16,
+        rootMargin: "0px 0px -50px"
+      }
+    );
+
+    processRevealElements.forEach((element) => {
+      processRevealObserver.observe(element);
+    });
+  }
+}
+
+
+/* Interactive process cards */
+
+const processCards = document.querySelectorAll(".process-card");
+
+const activateProcessCard = (selectedCard) => {
+  processCards.forEach((card) => {
+    card.classList.remove("is-active");
+  });
+
+  selectedCard.classList.add("is-active");
+};
+
+processCards.forEach((card) => {
+  card.addEventListener("click", () => {
+    activateProcessCard(card);
+  });
+
+  card.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") {
+      return;
+    }
+
+    event.preventDefault();
+    activateProcessCard(card);
+  });
+});
