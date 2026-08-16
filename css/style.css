@@ -4622,3 +4622,315 @@ body.is-ready .trusted-brands {
   transition-delay: 270ms;
 }
 
+
+/* ========================================
+   Laptop
+======================================== */
+
+@media (max-width: 1200px) {
+  .pricing-container {
+    width: min(1080px, calc(100% - 60px));
+  }
+
+  .pricing-showcase {
+    gap: 16px;
+
+    margin-top: 72px;
+  }
+
+  .pricing-visual,
+  .pricing-plan {
+    height: 330px;
+  }
+
+  .pricing-plan {
+    padding: 0 9px 9px;
+  }
+
+  .pricing-plan-card {
+    padding: 20px 16px 16px;
+  }
+
+  .pricing-plan-name h3 {
+    font-size: 19px;
+  }
+
+  .pricing-plan-description {
+    font-size: 12.5px;
+  }
+
+  .pricing-price-value {
+    font-size: 39px;
+  }
+
+  .pricing-action {
+    min-height: 43px;
+
+    margin-top: 32px;
+  }
+}
+
+
+/* ========================================
+   Tablet
+======================================== */
+
+@media (max-width: 920px) {
+  .pricing-section {
+    padding: 78px 0 84px;
+  }
+
+  .pricing-container {
+    width: calc(100% - 42px);
+  }
+
+  .pricing-title {
+    font-size: clamp(34px, 5vw, 40px);
+  }
+
+  .pricing-showcase {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 17px;
+
+    margin-top: 64px;
+  }
+
+  .pricing-visual,
+  .pricing-plan {
+    height: 340px;
+  }
+
+  .pricing-plan-card {
+    padding: 21px 18px 17px;
+  }
+
+  .pricing-plan-name h3 {
+    font-size: 20px;
+  }
+
+  .pricing-price-value {
+    font-size: 41px;
+  }
+
+  .pricing-comparison {
+    margin-top: 44px;
+  }
+
+  .pricing-comparison-scroll {
+    overflow-x: auto;
+
+    padding-bottom: 5px;
+
+    scrollbar-width: thin;
+  }
+
+  .pricing-table {
+    min-width: 820px;
+  }
+}
+
+
+/* ========================================
+   Mobile
+======================================== */
+
+@media (max-width: 600px) {
+  .pricing-section {
+    padding: 72px 0 76px;
+  }
+
+  .pricing-container {
+    width: calc(100% - 28px);
+  }
+
+  .pricing-badge {
+    min-height: 37px;
+
+    padding: 0 16px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+  }
+
+  .pricing-title {
+    max-width: 370px;
+
+    margin-top: 20px;
+
+    font-size: clamp(31px, 8.5vw, 36px);
+    line-height: 1.06;
+  }
+
+  .pricing-showcase {
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+
+    width: min(100%, 430px);
+
+    margin:
+      50px
+      auto
+      0;
+  }
+
+  .pricing-visual {
+    height: auto;
+    aspect-ratio: 1 / 1.04;
+
+    border-radius: 17px;
+  }
+
+  .pricing-plan {
+    height: 320px;
+
+    padding: 0 9px 9px;
+
+    border-radius: 17px;
+  }
+
+  .pricing-plan-offer {
+    height: 51px;
+
+    font-size: 14px;
+  }
+
+  .pricing-plan-card {
+    padding: 20px 17px 16px;
+
+    border-radius: 13px;
+  }
+
+  .pricing-plan-name h3 {
+    font-size: 19px;
+  }
+
+  .pricing-plan-description {
+    max-width: 260px;
+
+    font-size: 12.5px;
+  }
+
+  .pricing-price-value {
+    font-size: 39px;
+  }
+
+  .pricing-price-period {
+    font-size: 12px;
+  }
+
+  .pricing-action {
+    min-height: 43px;
+
+    margin-top: 30px;
+
+    border-radius: 16px;
+
+    font-size: 13px;
+  }
+
+  .pricing-plan:hover,
+  .pricing-plan.is-selected {
+    transform: translateY(-2px);
+  }
+
+  .pricing-comparison {
+    margin-top: 45px;
+  }
+
+  .pricing-comparison-scroll {
+    position: relative;
+
+    overflow-x: auto;
+
+    padding-bottom: 8px;
+
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .pricing-table {
+    min-width: 720px;
+  }
+
+  .pricing-table caption {
+    padding-left: 9px;
+
+    font-size: 13px;
+  }
+
+  .pricing-table th,
+  .pricing-table td {
+    height: 54px;
+
+    padding: 0 9px;
+
+    font-size: 12.5px;
+  }
+
+  .pricing-table th:first-child {
+    position: sticky;
+    left: 0;
+
+    z-index: 3;
+
+    background: #ffffff;
+  }
+
+  .pricing-table tbody tr:hover th:first-child {
+    background: #fafafa;
+  }
+}
+
+
+/* ========================================
+   Small Mobile
+======================================== */
+
+@media (max-width: 380px) {
+  .pricing-container {
+    width: calc(100% - 22px);
+  }
+
+  .pricing-title {
+    font-size: 30px;
+  }
+
+  .pricing-showcase {
+    margin-top: 45px;
+  }
+
+  .pricing-plan {
+    height: 310px;
+  }
+
+  .pricing-plan-name h3 {
+    font-size: 18px;
+  }
+
+  .pricing-price-value {
+    font-size: 37px;
+  }
+}
+
+
+/* ========================================
+   Reduced Motion
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .pricing-header-reveal,
+  .pricing-item-reveal,
+  .pricing-table-reveal {
+    opacity: 1;
+    transform: none;
+
+    transition-delay: 0ms !important;
+  }
+
+  .pricing-action::before,
+  .pricing-badge::before {
+    display: none;
+  }
+}
