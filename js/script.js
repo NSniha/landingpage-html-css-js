@@ -655,3 +655,21 @@ if (pricingRevealElements.length) {
   }
 }
 
+
+/* Pricing card interaction */
+
+const pricingPlans = document.querySelectorAll(".pricing-plan");
+
+pricingPlans.forEach((plan) => {
+  plan.addEventListener("click", (event) => {
+    if (event.target.closest(".pricing-action")) {
+      return;
+    }
+
+    pricingPlans.forEach((item) => {
+      item.classList.remove("is-selected");
+    });
+
+    plan.classList.add("is-selected");
+  });
+});
