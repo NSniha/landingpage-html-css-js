@@ -673,3 +673,26 @@ pricingPlans.forEach((plan) => {
     plan.classList.add("is-selected");
   });
 });
+
+
+/* Pricing actions */
+
+const pricingActions = document.querySelectorAll(
+  "[data-pricing-action]"
+);
+
+pricingActions.forEach((button) => {
+  button.addEventListener("click", () => {
+    const plan = button.closest(".pricing-plan");
+
+    if (!plan) {
+      return;
+    }
+
+    pricingPlans.forEach((item) => {
+      item.classList.remove("is-selected");
+    });
+
+    plan.classList.add("is-selected");
+  });
+});
