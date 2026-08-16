@@ -485,3 +485,135 @@ processCards.forEach((card) => {
     activateProcessCard(card);
   });
 });
+
+
+
+
+/* Customer stories reveal */
+
+const storiesRevealElements = document.querySelectorAll(
+  ".stories-header-reveal, .stories-marquee-reveal"
+);
+
+if (storiesRevealElements.length) {
+  if (prefersReducedMotion) {
+    storiesRevealElements.forEach((element) => {
+      element.classList.add("is-visible");
+    });
+  } else {
+    const storiesObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: "0px 0px -45px"
+      }
+    );
+
+    storiesRevealElements.forEach((element) => {
+      storiesObserver.observe(element);
+    });
+  }
+}
+
+
+/* Pause marquee while interacting */
+
+const storiesMarquee = document.querySelector(".stories-marquee");
+
+if (storiesMarquee) {
+  storiesMarquee.addEventListener("focusin", () => {
+    storiesMarquee.classList.add("is-paused");
+  });
+
+  storiesMarquee.addEventListener("focusout", () => {
+    storiesMarquee.classList.remove("is-paused");
+  });
+}
+
+
+/* Drag interaction */
+
+const storyRows = document.querySelectorAll("[data-marquee]");
+
+storyRows.forEach((row) => {
+  const track = row.querySelector(".stories-track");
+
+  if (!track || prefersReducedMotion) {
+    return;
+  }
+
+  let isDragging = false;
+  let startX = 0;
+  let currentX = 0;
+
+  const getPointerX = (event) => {
+    if (event.touches?.length) {
+      return event.touches[0].clientX;
+    }
+
+    return event.clientX;
+  };
+
+  const startDrag = (event) => {
+    isDragging = true;
+    startX = getPointerX(event);
+
+    storiesMarquee?.classList.add("is-dragging");
+
+    track.style.animationPlayState = "paused";
+
+    row.setPointerCapture?.(event.pointerId);
+  };
+
+  const moveDrag = (event) => {
+    if (!isDragging) {
+      return;
+    }
+
+    const pointerX = getPointerX(event);
+    const distance = pointerX - startX;
+
+    currentX = Math.max(
+      -130,
+      Math.min(130, distance)
+    );
+
+    track.style.translate = `${currentX}px 0`;
+  };
+
+  const endDrag = () => {
+    if (!isDragging) {
+      return;
+    }
+
+    isDragging = false;
+
+    storiesMarquee?.classList.remove("is-dragging");
+
+    track.style.transition =
+      "translate 650ms cubic-bezier(0.16, 1, 0.3, 1)";
+
+    track.style.translate = "0 0";
+
+    window.setTimeout(() => {
+      track.style.transition = "";
+      track.style.animationPlayState = "";
+      currentX = 0;
+    }, 660);
+  };
+
+  row.addEventListener("pointerdown", startDrag);
+  row.addEventListener("pointermove", moveDrag);
+  row.addEventListener("pointerup", endDrag);
+  row.addEventListener("pointercancel", endDrag);
+  row.addEventListener("pointerleave", endDrag);
+});
