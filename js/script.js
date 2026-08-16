@@ -617,3 +617,41 @@ storyRows.forEach((row) => {
   row.addEventListener("pointercancel", endDrag);
   row.addEventListener("pointerleave", endDrag);
 });
+
+
+
+/* Pricing section reveal */
+
+const pricingRevealElements = document.querySelectorAll(
+  ".pricing-header-reveal, .pricing-item-reveal, .pricing-table-reveal"
+);
+
+if (pricingRevealElements.length) {
+  if (prefersReducedMotion) {
+    pricingRevealElements.forEach((element) => {
+      element.classList.add("is-visible");
+    });
+  } else {
+    const pricingObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: "0px 0px -45px"
+      }
+    );
+
+    pricingRevealElements.forEach((element) => {
+      pricingObserver.observe(element);
+    });
+  }
+}
+
