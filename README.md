@@ -1,3 +1,4 @@
+<img width="1280" height="800" alt="preview-buisness" src="https://github.com/user-attachments/assets/791c1809-800c-420c-910f-deaae09e1a5d" />
 # Loodo — Privacy & Data Trust Platform
 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
