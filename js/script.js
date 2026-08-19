@@ -743,3 +743,104 @@ const footerYear = document.querySelector("#footer-year");
 if (footerYear) {
   footerYear.textContent = new Date().getFullYear();
 }
+
+
+/* Newsletter validation */
+
+const newsletterForm = document.querySelector(
+  "#newsletter-form"
+);
+
+const newsletterEmail = document.querySelector(
+  "#newsletter-email"
+);
+
+const newsletterMessage = document.querySelector(
+  "#newsletter-message"
+);
+
+if (
+  newsletterForm &&
+  newsletterEmail &&
+  newsletterMessage
+) {
+  const showNewsletterMessage = (
+    message,
+    type
+  ) => {
+    newsletterForm.classList.remove(
+      "is-error",
+      "is-success"
+    );
+
+    newsletterMessage.classList.remove(
+      "is-error",
+      "is-success",
+      "is-visible"
+    );
+
+    newsletterForm.classList.add(
+      type === "success"
+        ? "is-success"
+        : "is-error"
+    );
+
+    newsletterMessage.classList.add(
+      type === "success"
+        ? "is-success"
+        : "is-error",
+      "is-visible"
+    );
+
+    newsletterMessage.textContent = message;
+  };
+
+
+  newsletterForm.addEventListener(
+    "submit",
+    (event) => {
+      event.preventDefault();
+
+      const email =
+        newsletterEmail.value.trim();
+
+      const emailPattern =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailPattern.test(email)) {
+        showNewsletterMessage(
+          "Please enter a valid email address.",
+          "error"
+        );
+
+        newsletterEmail.focus();
+
+        return;
+      }
+
+      showNewsletterMessage(
+        "Thanks! You're now subscribed.",
+        "success"
+      );
+
+      newsletterForm.reset();
+    }
+  );
+
+
+  newsletterEmail.addEventListener(
+    "input",
+    () => {
+      newsletterForm.classList.remove(
+        "is-error",
+        "is-success"
+      );
+
+      newsletterMessage.classList.remove(
+        "is-visible",
+        "is-error",
+        "is-success"
+      );
+    }
+  );
+}
