@@ -9,6 +9,8 @@
 
 A responsive SaaS landing page concept for **Loodo**, a privacy and data-compliance platform. Built with vanilla HTML, CSS, and JavaScript — no frameworks, no build step.
 
+<img width="1280" height="800" alt="preview-buisness" src="https://github.com/user-attachments/assets/f86818da-91f1-41fe-8fd7-6226fbe82857" />
+
 ## Overview
 
 Loodo's landing page automates the "trust story" a compliance SaaS product needs to tell: consent management, data protection, and regulatory compliance, presented through a full marketing funnel from hero to pricing to sign-up.
