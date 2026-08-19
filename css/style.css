@@ -5443,3 +5443,245 @@ body.is-ready .trusted-brands {
 .footer-bottom.footer-reveal {
   transition-delay: 310ms;
 }
+
+
+/* ========================================
+   Laptop
+======================================== */
+
+@media (max-width: 1200px) {
+  .site-footer {
+    padding: 84px 0 74px;
+  }
+
+  .footer-container {
+    width: min(1040px, calc(100% - 60px));
+  }
+
+  .footer-main {
+    grid-template-columns:
+      1.3fr
+      0.65fr
+      0.9fr
+      1.4fr;
+
+    gap: 38px;
+  }
+
+  .footer-logo img {
+    width: 126px;
+  }
+
+  .footer-brand-text,
+  .footer-navigation a,
+  .footer-contact a,
+  .footer-contact span,
+  .footer-newsletter-text {
+    font-size: 14px;
+  }
+}
+
+
+/* ========================================
+   Tablet
+======================================== */
+
+@media (max-width: 920px) {
+  .site-footer {
+    padding: 76px 0 68px;
+  }
+
+  .footer-container {
+    width: calc(100% - 42px);
+  }
+
+  .footer-main {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 58px 50px;
+  }
+
+  .footer-brand {
+    max-width: 300px;
+  }
+
+  .footer-brand-text {
+    margin-top: 30px;
+  }
+
+  .footer-navigation,
+  .footer-contact {
+    margin-top: 27px;
+  }
+
+  .footer-newsletter-text {
+    margin-top: 27px;
+  }
+
+  .newsletter-form {
+    max-width: 340px;
+  }
+
+  .footer-bottom {
+    margin-top: 64px;
+  }
+}
+
+
+/* ========================================
+   Mobile
+======================================== */
+
+@media (max-width: 600px) {
+  .site-footer {
+    padding: 68px 0 54px;
+  }
+
+  .footer-container {
+    width: calc(100% - 36px);
+  }
+
+  .footer-main {
+    grid-template-columns: 1fr;
+
+    gap: 44px;
+  }
+
+  .footer-brand {
+    max-width: 310px;
+  }
+
+  .footer-logo img {
+    width: 112px;
+  }
+
+  .footer-brand-text {
+    max-width: 285px;
+
+    margin-top: 27px;
+
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  .footer-heading {
+    font-size: 17px;
+  }
+
+  .footer-navigation,
+  .footer-contact {
+    gap: 10px;
+
+    margin-top: 24px;
+  }
+
+  .footer-navigation a,
+  .footer-contact a,
+  .footer-contact span {
+    font-size: 13.5px;
+  }
+
+  .footer-newsletter-text {
+    max-width: 330px;
+
+    margin: 23px 0 16px;
+
+    font-size: 13px;
+    line-height: 1.25;
+  }
+
+  .newsletter-form {
+    width: 100%;
+    max-width: 100%;
+    height: 46px;
+  }
+
+  .newsletter-form input {
+    padding-left: 10px;
+
+    font-size: 12px;
+  }
+
+  .newsletter-button {
+    height: 38px;
+
+    font-size: 12px;
+  }
+
+  .footer-bottom {
+    min-height: 0;
+
+    flex-direction: column;
+    align-items: flex-start;
+
+    margin-top: 54px;
+    padding-top: 24px;
+  }
+
+  .footer-copyright {
+    font-size: 11px;
+  }
+
+  .footer-socials {
+    gap: 18px;
+  }
+
+  .footer-socials a {
+    width: 22px;
+    height: 22px;
+  }
+
+  .footer-socials ion-icon {
+    font-size: 18px;
+  }
+}
+
+
+/* ========================================
+   Small Mobile
+======================================== */
+
+@media (max-width: 380px) {
+  .site-footer {
+    padding: 62px 0 48px;
+  }
+
+  .footer-container {
+    width: calc(100% - 28px);
+  }
+
+  .footer-main {
+    gap: 39px;
+  }
+
+  .footer-logo img {
+    width: 105px;
+  }
+
+  .footer-brand-text {
+    font-size: 12.5px;
+  }
+
+  .newsletter-button {
+    min-width: 82px;
+  }
+}
+
+
+/* ========================================
+   Reduced Motion
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-reveal {
+    opacity: 1;
+    transform: none;
+
+    transition-delay: 0ms !important;
+  }
+
+  .newsletter-button::before {
+    display: none;
+  }
+}
