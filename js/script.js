@@ -696,3 +696,7 @@ pricingActions.forEach((button) => {
     plan.classList.add("is-selected");
   });
 });
+
+
+
+
