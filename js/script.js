@@ -734,3 +734,12 @@ if (footerRevealElements.length) {
     });
   }
 }
+
+
+/* Dynamic copyright year */
+
+const footerYear = document.querySelector("#footer-year");
+
+if (footerYear) {
+  footerYear.textContent = new Date().getFullYear();
+}
