@@ -700,3 +700,37 @@ pricingActions.forEach((button) => {
 
 
 
+/* Footer reveal */
+
+const footerRevealElements = document.querySelectorAll(
+  ".site-footer .footer-reveal"
+);
+
+if (footerRevealElements.length) {
+  if (prefersReducedMotion) {
+    footerRevealElements.forEach((element) => {
+      element.classList.add("is-visible");
+    });
+  } else {
+    const footerObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: "0px 0px -35px"
+      }
+    );
+
+    footerRevealElements.forEach((element) => {
+      footerObserver.observe(element);
+    });
+  }
+}
