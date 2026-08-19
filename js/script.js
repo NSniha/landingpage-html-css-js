@@ -700,6 +700,85 @@ pricingActions.forEach((button) => {
 
 
 
+
+/* Final CTA reveal */
+
+const finalCta = document.querySelector(".final-cta-reveal");
+
+if (finalCta) {
+  if (prefersReducedMotion) {
+    finalCta.classList.add("is-visible");
+  } else {
+    const finalCtaObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.18,
+        rootMargin: "0px 0px -50px"
+      }
+    );
+
+    finalCtaObserver.observe(finalCta);
+  }
+}
+
+
+/* Final CTA background parallax */
+
+const finalCtaWrap = document.querySelector(".final-cta-wrap");
+
+if (finalCtaWrap && !prefersReducedMotion) {
+  finalCtaWrap.addEventListener("pointermove", (event) => {
+    if (window.innerWidth <= 920) {
+      return;
+    }
+
+    const bounds = finalCtaWrap.getBoundingClientRect();
+
+    const relativeX =
+      (event.clientX - bounds.left) / bounds.width - 0.5;
+
+    const relativeY =
+      (event.clientY - bounds.top) / bounds.height - 0.5;
+
+    const moveX = relativeX * -8;
+    const moveY = relativeY * -6;
+
+    finalCtaWrap.style.setProperty(
+      "--final-cta-x",
+      `${moveX}px`
+    );
+
+    finalCtaWrap.style.setProperty(
+      "--final-cta-y",
+      `${moveY}px`
+    );
+  });
+
+  finalCtaWrap.addEventListener("pointerleave", () => {
+    finalCtaWrap.style.setProperty(
+      "--final-cta-x",
+      "0px"
+    );
+
+    finalCtaWrap.style.setProperty(
+      "--final-cta-y",
+      "0px"
+    );
+  });
+}
+
+
+
+
 /* Footer reveal */
 
 const footerRevealElements = document.querySelectorAll(
