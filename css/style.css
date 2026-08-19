@@ -5012,15 +5012,13 @@ body.is-ready .trusted-brands {
 /* Heading */
 
 .final-cta-title {
-  margin: 0;
-
-  color: #ffffff;
-
-  font-family: var(--font-primary);
-  font-size: clamp(39px, 3.25vw, 48px);
-  line-height: 1.04;
-  font-weight: 400;
-  letter-spacing: -0.06em;
+    margin: 0;
+    color: #ffffff;
+    font-family: var(--font-primary);
+    font-size: clamp(54px, 6.2vw, 48px);
+    line-height: 1.04;
+    font-weight: 400;
+    letter-spacing: -0.06em;
 }
 
 
@@ -5185,14 +5183,12 @@ body.is-ready .trusted-brands {
 .final-cta-avatars img {
   position: relative;
 
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
 
   flex: 0 0 32px;
 
   margin-left: -9px;
-
-  border: 2px solid rgba(255, 255, 255, 0.95);
   border-radius: 50%;
 
   background: #d7d7d7;
